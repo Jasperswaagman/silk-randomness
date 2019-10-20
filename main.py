@@ -1,6 +1,5 @@
 import pyautogui, time, random, keyboard, pytweening
-# Packages needed: pyautogui, keyboard 
-# This script is made with https://steamcommunity.com/sharedfiles/filedetails/?id=823274093 in mind.
+# Packages needed: pyautogui, keyboard
 
 ###################
 # Your variables
@@ -49,6 +48,7 @@ posRotSym = [
 posCenter = (-3964, 1083)
 posMirrorCenter = (-2119, 451)
 #posSpiralCenter = (-204, 486)
+posControls = (-2114, 82)
 
 ###################
 # left, 1080p
@@ -114,25 +114,28 @@ pyautogui.getPointOnLine = getPointOnCurve # Replacement
 def returnToCenter():
     pyautogui.moveTo(posCenter[0], posCenter[1])
 
-def clickControllButton(x, y):
+def clickControlButton(x, y):
     pyautogui.mouseUp()
     pyautogui.moveTo(x, y, tween='linear')
     pyautogui.mouseDown(duration=0.2)
     pyautogui.mouseUp()
 
 def cleanScreen():
-    clickControllButton(posNew[0], posNew[1])
+    clickControlButton(posNew[0], posNew[1])
 
 def changeColor():
     color = random.choice(posColors)
-    clickControllButton(color[0], color[1])
+    clickControlButton(color[0], color[1])
 
 def changeRotationalSym():
     rotSym = random.choices(posRotSym, weights=[40, 5, 5, 20, 20, 20])
-    clickControllButton(rotSym[0][0], rotSym[0][1])
+    clickControlButton(rotSym[0][0], rotSym[1][1])
 
 def toggleMirroring():
-    clickControllButton(posMirrorCenter[0], posMirrorCenter[1])
+    clickControlButton(posMirrorCenter[0], posMirrorCenter[1])
+
+def toggleControls():
+    clickControlButton(posControls[0], posControls[1])
     
 # Tweening functions
 tweening = [
@@ -144,6 +147,7 @@ tweening = [
 ]
 
 cleanScreen()
+toggleControls()
 i = 0
 while True:
     if (i == cleanScreenInterval): cleanScreen; i = 0
