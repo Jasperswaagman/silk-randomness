@@ -10,7 +10,7 @@ chanceChangeColor = 10 # Chance that the color will change (1,100)
 chanceChangeRotationalSym = 7 # Chance that the rotational symmetry will change (1,100)
 chanceMirroring = 7 # Chance that the rotational symmetry will change (1,100)
 drawInterval = .3 # Every n seconds a line will be drawn
-cleanScreenInterval = 100 # After n drawn lines the screen will be cleaned
+cleanScreenInterval = 75 # After n drawn lines the screen will be cleaned
 minDuration = 200 # No need to change these
 maxDuration = 1000 # No need to change these
 
@@ -128,8 +128,8 @@ def changeColor():
     clickControlButton(color[0], color[1])
 
 def changeRotationalSym():
-    rotSym = random.choices(posRotSym, weights=[40, 5, 5, 20, 20, 20])
-    clickControlButton(rotSym[0][0], rotSym[1][1])
+    rotSym = random.choices(posRotSym, weights=[30, 10, 10, 10, 20, 20])
+    clickControlButton(rotSym[0][0], rotSym[0][1])
 
 def toggleMirroring():
     clickControlButton(posMirrorCenter[0], posMirrorCenter[1])
@@ -158,13 +158,15 @@ while True:
     # Get our random numbers
     random.seed()
 
-    # Get a new color maybe?
-    if (random.randint(1,100) <= chanceChangeColor): changeColor()
-    # Chance rotational symmetry or mirroring maybe?
-    if (random.randint(1,100) <= chanceChangeRotationalSym): changeRotationalSym(); changeColor(); toggleMirroring()
-    elif (random.randint(1,100) <= chanceMirroring): toggleMirroring()
-    # Clean our screen maybe?
-    if (random.randint(1,1000) <= chanceCleanScreen): cleanScreen(); i = 0
+    # Only do something every 2 strokes
+    if (i % 2 == 0 and i != 0):
+        # Get a new color maybe?
+        if (random.randint(1,100) <= chanceChangeColor): changeColor()
+        # Chance rotational symmetry or mirroring maybe?
+        if (random.randint(1,100) <= chanceChangeRotationalSym): changeRotationalSym(); changeColor(); toggleMirroring()
+        elif (random.randint(1,100) <= chanceMirroring): toggleMirroring()
+        # Clean our screen maybe?
+        if (random.randint(1,1000) <= chanceCleanScreen): cleanScreen(); i = 0
 
     # Get our new position
     randX = random.randint(gridXMinMax[0], gridXMinMax[1])
