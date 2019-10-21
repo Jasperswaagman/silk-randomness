@@ -152,7 +152,7 @@ i = 0
 while True:
     if (i == cleanScreenInterval): cleanScreen; i = 0
     # If q is pressed we stop the madness
-    if keyboard.is_pressed('q'): pyautogui.mouseUp(); break
+    if keyboard.is_pressed('q'): pyautogui.mouseUp(); toggleControls(); break
     # On a pressed r we clean the screen
     if keyboard.is_pressed('r'): cleanScreen(); i = 0
     # Get our random numbers
