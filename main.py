@@ -150,7 +150,7 @@ cleanScreen()
 toggleControls()
 i = 0
 while True:
-    if (i == cleanScreenInterval): cleanScreen; i = 0
+    if (i >= cleanScreenInterval): cleanScreen; i = 0
     # If q is pressed we stop the madness
     if keyboard.is_pressed('q'): pyautogui.mouseUp(); toggleControls(); break
     # On a pressed r we clean the screen
